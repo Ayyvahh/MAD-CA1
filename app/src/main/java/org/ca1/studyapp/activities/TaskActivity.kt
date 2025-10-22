@@ -24,6 +24,12 @@ class TaskActivity : AppCompatActivity() {
 
         app = application as MainApp
 
+        if (intent.hasExtra("task_edit")) {
+            task = intent.extras?.getParcelable("task_edit")!!
+            binding.taskTitle.setText(task.title)
+            binding.taskDescription.setText(task.description)
+        }
+
         binding.btnAdd.setOnClickListener() {
             task.title = binding.taskTitle.text.toString()
             task.description = binding.taskDescription.text.toString()
