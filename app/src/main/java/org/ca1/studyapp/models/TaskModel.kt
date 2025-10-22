@@ -1,3 +1,11 @@
 package org.ca1.studyapp.models
 
-data class TaskModel(var title: String = "", var description: String = "")
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class TaskModel(
+    var id: Long = 0,
+    var title: String = "",
+    var description: String = ""
+) : Parcelable

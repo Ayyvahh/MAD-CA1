@@ -9,10 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.ca1.studyapp.R
 import org.ca1.studyapp.adapters.TaskAdapter
+import org.ca1.studyapp.adapters.TaskListener
 import org.ca1.studyapp.databinding.ActivityTaskListBinding
 import org.ca1.studyapp.main.MainApp
+import org.ca1.studyapp.models.TaskModel
 
-class TaskListActivity : AppCompatActivity() {
+class TaskListActivity : AppCompatActivity(), TaskListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityTaskListBinding
@@ -28,7 +30,7 @@ class TaskListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = TaskAdapter(app.tasks.findAll())
+        binding.recyclerView.adapter = TaskAdapter(app.tasks.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,6 +54,22 @@ class TaskListActivity : AppCompatActivity() {
         ) {
             if (it.resultCode == RESULT_OK) {
                 (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.tasks.findAll().size)
+            }
+        }
+
+    override fun onTaskClick(task: TaskModel) {
+        val launcherIntent = Intent(this, TaskActivity::class.java)
+        launcherIntent.putExtra("task_edit", task)
+        getClickResult.launch(launcherIntent)
+    }
+
+    private val getClickResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == RESULT_OK) {
+                (binding.recyclerView.adapter)?.
+                notifyItemRangeChanged(0, app.tasks.findAll().size)
             }
         }
 }

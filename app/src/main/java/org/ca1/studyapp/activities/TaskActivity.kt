@@ -17,6 +17,7 @@ class TaskActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var edit = false
         binding = ActivityTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.toolbarAdd.title = "Add a Task"
@@ -24,17 +25,29 @@ class TaskActivity : AppCompatActivity() {
 
         app = application as MainApp
 
+        if (intent.hasExtra("task_edit")) {
+            edit = true
+            task = intent.extras?.getParcelable("task_edit")!!
+            binding.taskTitle.setText(task.title)
+            binding.taskDescription.setText(task.description)
+            binding.btnAdd.setText(R.string.save_task)
+        }
+
         binding.btnAdd.setOnClickListener() {
             task.title = binding.taskTitle.text.toString()
             task.description = binding.taskDescription.text.toString()
-            if (task.title.isNotEmpty()) {
-                app.tasks.create(task.copy())
-                setResult(RESULT_OK)
-                finish()
-            } else {
-                Snackbar.make(it, "Please Enter a title", Snackbar.LENGTH_LONG)
+            if (task.title.isEmpty()) {
+                Snackbar.make(it, R.string.enter_task_title, Snackbar.LENGTH_LONG)
                     .show()
+            } else {
+                if (edit) {
+                    app.tasks.update(task.copy())
+                } else {
+                    app.tasks.create(task.copy())
+                }
             }
+            setResult(RESULT_OK)
+            finish()
         }
     }
 

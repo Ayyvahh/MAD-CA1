@@ -6,7 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import org.ca1.studyapp.databinding.CardTaskBinding
 import org.ca1.studyapp.models.TaskModel
 
-class TaskAdapter constructor(private var tasks: List<TaskModel>) :
+interface TaskListener {
+    fun onTaskClick(task: TaskModel)
+}
+
+class TaskAdapter (private var tasks: List<TaskModel>,
+                               private val listener: TaskListener) :
     RecyclerView.Adapter<TaskAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -17,7 +22,7 @@ class TaskAdapter constructor(private var tasks: List<TaskModel>) :
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val task = tasks[holder.bindingAdapterPosition]
-        holder.bind(task)
+        holder.bind(task, listener)
     }
 
     override fun getItemCount(): Int = tasks.size
@@ -25,9 +30,10 @@ class TaskAdapter constructor(private var tasks: List<TaskModel>) :
     class MainHolder(private val binding : CardTaskBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(task: TaskModel) {
+        fun bind(task: TaskModel, listener: TaskListener) {
             binding.taskTitle.text = task.title
             binding.description.text = task.description
+            binding.root.setOnClickListener { listener.onTaskClick(task) }
         }
     }
 }
