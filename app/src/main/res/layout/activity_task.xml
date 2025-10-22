@@ -42,7 +42,7 @@
 
                 <EditText
                     android:id="@+id/taskTitle"
-                    android:layout_width="match_parent"
+                    android:layout_width="373dp"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
                     android:autofillHints="hint"

@@ -9,7 +9,6 @@ import org.ca1.studyapp.R
 import org.ca1.studyapp.databinding.ActivityTaskBinding
 import org.ca1.studyapp.main.MainApp
 import org.ca1.studyapp.models.TaskModel
-import timber.log.Timber
 
 class TaskActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTaskBinding
@@ -24,16 +23,12 @@ class TaskActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
-        Timber.Forest.i("Task Activity started...")
+
         binding.btnAdd.setOnClickListener() {
             task.title = binding.taskTitle.text.toString()
             task.description = binding.taskDescription.text.toString()
             if (task.title.isNotEmpty()) {
-                app.tasks.add(task.copy())
-                Timber.Forest.i("add Button Pressed: $task")
-                for (i in app.tasks.indices) {
-                    Timber.Forest.i("Task[$i]:${this.app.tasks[i]}")
-                }
+                app.tasks.create(task.copy())
                 setResult(RESULT_OK)
                 finish()
             } else {

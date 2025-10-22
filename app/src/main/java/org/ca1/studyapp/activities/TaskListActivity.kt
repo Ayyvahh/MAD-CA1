@@ -28,7 +28,7 @@ class TaskListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = TaskAdapter(app.tasks)
+        binding.recyclerView.adapter = TaskAdapter(app.tasks.findAll())
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -51,7 +51,7 @@ class TaskListActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.tasks.size)
+                (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.tasks.findAll().size)
             }
         }
 }
