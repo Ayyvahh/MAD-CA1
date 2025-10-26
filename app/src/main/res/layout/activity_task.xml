@@ -47,10 +47,30 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="208dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:foregroundGravity="center">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="244dp"
+                        android:layout_height="207dp"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:alpha="0.80"
+                        android:contentDescription="@null"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/checklist_pana" />
+                </FrameLayout>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="4dp"
                     app:cardUseCompatPadding="true">
@@ -118,8 +138,9 @@
                         </LinearLayout>
 
                         <com.google.android.material.chip.ChipGroup
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:layout_marginTop="8dp"
                             android:elevation="10dp"
                             app:checkedChip="@id/chipTask"
@@ -175,25 +196,6 @@
                     android:text="@string/button_addTask"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="20sp" />
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="260dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="24dp"
-                    android:foregroundGravity="center">
-
-                    <ImageView
-                        android:id="@+id/imageView4"
-                        android:layout_width="273dp"
-                        android:layout_height="267dp"
-                        android:layout_gravity="center"
-                        android:adjustViewBounds="true"
-                        android:alpha="0.80"
-                        android:contentDescription="@null"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/checklist_pana" />
-                </FrameLayout>
 
             </LinearLayout>
         </ScrollView>
