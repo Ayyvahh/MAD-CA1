@@ -9,7 +9,8 @@ data class TaskModel(
     var title: String = "",
     var description: String = "",
     var type: TaskType = TaskType.GENERAL,
-    var completed: Boolean = false
+    var completed: Boolean = false,
+    var deadline: String = ""
 ) : Parcelable
 
 enum class TaskType {

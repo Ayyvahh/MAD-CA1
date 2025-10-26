@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/item_cancel"
-        android:icon="@drawable/close_48px"
-        android:iconTint="#000000"
+        android:icon="@drawable/cancel_24px"
+        android:iconTint="@color/purple"
         android:title="@string/menu_cancel"
         app:showAsAction="always" />
 </menu>

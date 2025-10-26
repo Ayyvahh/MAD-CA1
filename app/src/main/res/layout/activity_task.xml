@@ -5,12 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     tools:context="org.ca1.studyapp.activities.TaskActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -25,9 +28,12 @@
                 android:id="@+id/toolbarAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
                 app:titleCentered="true"
-                app:titleTextColor="#0D0B0B" />
+                app:titleTextColor="@android:color/black" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView
@@ -167,6 +173,26 @@
                     android:text="@string/button_addTask"
                     android:textColor="?attr/colorOnPrimary"
                     android:textSize="20sp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:foregroundGravity="center">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="273dp"
+                        android:layout_height="267dp"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:alpha="0.80"
+                        android:contentDescription="@null"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/checklist_pana" />
+                </FrameLayout>
+
             </LinearLayout>
         </ScrollView>
 

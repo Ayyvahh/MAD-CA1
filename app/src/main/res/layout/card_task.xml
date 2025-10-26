@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="5dp"
     android:elevation="10dp"
     app:cardCornerRadius="15dp"
     app:cardElevation="5dp">
@@ -13,6 +13,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:padding="12dp">
 
         <TextView
@@ -34,7 +35,6 @@
             android:id="@+id/taskDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:contentDescription="@string/content_desc_mark_done"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,22 +54,38 @@
             app:layout_constraintTop_toBottomOf="@+id/taskTitle"
             tools:text="A Description" />
 
+        <TextView
+            android:id="@+id/taskDeadline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/taskDone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            tools:text="Due: Oct 26, 2025" />
+
         <com.google.android.material.chip.Chip
             android:id="@+id/taskType"
             style="@style/Widget.Material3.Chip.Assist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="1dp"
             android:checked="false"
             android:textColor="#121010"
             android:textSize="12sp"
             app:checkedIcon="@android:drawable/checkbox_on_background"
-            app:chipBackgroundColor="#968AAE"
+            app:chipBackgroundColor="#BFB7CF"
             app:chipMinHeight="28dp"
+            app:chipStrokeColor="#00FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/taskDeadline"
             tools:text="STUDY" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
