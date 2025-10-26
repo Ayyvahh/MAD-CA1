@@ -23,7 +23,7 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
         super.onCreate(savedInstanceState)
         binding = ActivityTaskListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.toolbar.title = title
+        binding.toolbar.title = "Study Tasks"
         setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
@@ -61,6 +61,11 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
         val launcherIntent = Intent(this, TaskActivity::class.java)
         launcherIntent.putExtra("task_edit", task)
         getClickResult.launch(launcherIntent)
+    }
+
+    override fun onTaskCheckChanged(task: TaskModel, isChecked: Boolean) {
+        task.completed = isChecked
+        app.tasks.update(task)
     }
 
     private val getClickResult =

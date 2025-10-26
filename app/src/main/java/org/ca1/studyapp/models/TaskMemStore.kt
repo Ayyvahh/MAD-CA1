@@ -23,10 +23,12 @@ class TaskMemStore : TaskStore {
     }
 
     override fun update(task: TaskModel) {
-        var foundTask: TaskModel? = tasks.find { p -> p.id == task.id }
+        val foundTask: TaskModel? = tasks.find { p -> p.id == task.id }
         if (foundTask != null) {
             foundTask.title = task.title
             foundTask.description = task.description
+            foundTask.type = task.type
+            foundTask.completed = task.completed
             logAll()
         }
     }
@@ -34,5 +36,5 @@ class TaskMemStore : TaskStore {
     private fun logAll() {
         tasks.forEach { i("$it") }
     }
-}
 
+}
