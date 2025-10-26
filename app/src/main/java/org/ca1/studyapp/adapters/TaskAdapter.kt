@@ -8,6 +8,7 @@ import org.ca1.studyapp.models.TaskModel
 
 interface TaskListener {
     fun onTaskClick(task: TaskModel)
+    fun onTaskCheckChanged(task: TaskModel, isChecked: Boolean)
 }
 
 class TaskAdapter (private var tasks: List<TaskModel>,
@@ -33,7 +34,14 @@ class TaskAdapter (private var tasks: List<TaskModel>,
         fun bind(task: TaskModel, listener: TaskListener) {
             binding.taskTitle.text = task.title
             binding.description.text = task.description
+            binding.taskType.text = task.type.name
+            binding.taskDone.isChecked = task.completed
+
             binding.root.setOnClickListener { listener.onTaskClick(task) }
+
+            binding.taskDone.setOnCheckedChangeListener { _, isChecked ->
+                listener.onTaskCheckChanged(task, isChecked)
+            }
         }
     }
 }

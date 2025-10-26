@@ -63,6 +63,11 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
         getClickResult.launch(launcherIntent)
     }
 
+    override fun onTaskCheckChanged(task: TaskModel, isChecked: Boolean) {
+        task.completed = isChecked
+        app.tasks.update(task)
+    }
+
     private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()

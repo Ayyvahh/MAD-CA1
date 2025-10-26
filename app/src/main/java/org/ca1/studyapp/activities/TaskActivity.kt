@@ -9,6 +9,7 @@ import org.ca1.studyapp.R
 import org.ca1.studyapp.databinding.ActivityTaskBinding
 import org.ca1.studyapp.main.MainApp
 import org.ca1.studyapp.models.TaskModel
+import org.ca1.studyapp.models.TaskType
 
 class TaskActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTaskBinding
@@ -31,11 +32,25 @@ class TaskActivity : AppCompatActivity() {
             binding.taskTitle.setText(task.title)
             binding.taskDescription.setText(task.description)
             binding.btnAdd.setText(R.string.save_task)
+
+            when (task.type) {
+                TaskType.STUDY -> binding.chipStudy.isChecked = true
+                TaskType.LAB -> binding.chipLab.isChecked = true
+                TaskType.ASSIGNMENT -> binding.chipAssignment.isChecked = true
+                TaskType.GENERAL -> binding.chipTask.isChecked = true
+            }
         }
 
-        binding.btnAdd.setOnClickListener() {
+        binding.btnAdd.setOnClickListener {
             task.title = binding.taskTitle.text.toString()
             task.description = binding.taskDescription.text.toString()
+            task.type = when {
+                binding.chipStudy.isChecked -> TaskType.STUDY
+                binding.chipLab.isChecked -> TaskType.LAB
+                binding.chipAssignment.isChecked -> TaskType.ASSIGNMENT
+                binding.chipTask.isChecked -> TaskType.GENERAL
+                else -> TaskType.GENERAL
+            }
             if (task.title.isEmpty()) {
                 Snackbar.make(it, R.string.enter_task_title, Snackbar.LENGTH_LONG)
                     .show()
