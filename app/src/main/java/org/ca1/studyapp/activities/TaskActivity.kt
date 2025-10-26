@@ -4,13 +4,20 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import org.ca1.studyapp.R
 import org.ca1.studyapp.databinding.ActivityTaskBinding
 import org.ca1.studyapp.main.MainApp
 import org.ca1.studyapp.models.TaskModel
 import org.ca1.studyapp.models.TaskType
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
+//TODO: input validation
+//TODO: JSON STORAGE
+//TODO: ADD LIST SORTING BY TYPE/DEADLINE
 class TaskActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTaskBinding
     var task = TaskModel()
@@ -37,8 +44,29 @@ class TaskActivity : AppCompatActivity() {
                 TaskType.STUDY -> binding.chipStudy.isChecked = true
                 TaskType.LAB -> binding.chipLab.isChecked = true
                 TaskType.ASSIGNMENT -> binding.chipAssignment.isChecked = true
-                TaskType.GENERAL -> binding.chipTask.isChecked = true
+                TaskType.TASK -> binding.chipTask.isChecked = true
             }
+
+            if (task.deadline.isNotBlank()) {
+                binding.button.text = task.deadline
+            }
+        }
+
+        binding.button.setOnClickListener {
+            val datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select deadline date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build()
+
+            // https://www.geeksforgeeks.org/kotlin/material-design-date-picker-in-android-using-kotlin/
+            datePicker.addOnPositiveButtonClickListener { selection ->
+                val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+                val selectedDate = dateFormat.format(Date(selection))
+                task.deadline = selectedDate
+                binding.button.text = selectedDate
+            }
+
+            datePicker.show(supportFragmentManager, "DATE_PICKER")
         }
 
         binding.btnAdd.setOnClickListener {
@@ -48,9 +76,10 @@ class TaskActivity : AppCompatActivity() {
                 binding.chipStudy.isChecked -> TaskType.STUDY
                 binding.chipLab.isChecked -> TaskType.LAB
                 binding.chipAssignment.isChecked -> TaskType.ASSIGNMENT
-                binding.chipTask.isChecked -> TaskType.GENERAL
-                else -> TaskType.GENERAL
+                binding.chipTask.isChecked -> TaskType.TASK
+                else -> TaskType.TASK
             }
+
             if (task.title.isEmpty()) {
                 Snackbar.make(it, R.string.enter_task_title, Snackbar.LENGTH_LONG)
                     .show()
@@ -60,9 +89,9 @@ class TaskActivity : AppCompatActivity() {
                 } else {
                     app.tasks.create(task.copy())
                 }
+                setResult(RESULT_OK)
+                finish()
             }
-            setResult(RESULT_OK)
-            finish()
         }
     }
 

@@ -29,6 +29,7 @@ class TaskMemStore : TaskStore {
             foundTask.description = task.description
             foundTask.type = task.type
             foundTask.completed = task.completed
+            foundTask.deadline = task.deadline
             logAll()
         }
     }
