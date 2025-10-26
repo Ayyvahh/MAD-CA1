@@ -8,7 +8,7 @@ data class TaskModel(
     var id: Long = 0,
     var title: String = "",
     var description: String = "",
-    var type: TaskType = TaskType.GENERAL,
+    var type: TaskType = TaskType.TASK,
     var completed: Boolean = false,
     var deadline: String = ""
 ) : Parcelable
@@ -17,5 +17,5 @@ enum class TaskType {
     ASSIGNMENT,
     LAB,
     STUDY,
-    GENERAL
+    TASK
 }

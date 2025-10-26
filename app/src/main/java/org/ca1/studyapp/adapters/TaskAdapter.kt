@@ -1,6 +1,7 @@
 package org.ca1.studyapp.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.ca1.studyapp.databinding.CardTaskBinding
@@ -43,7 +44,15 @@ class TaskAdapter (private var tasks: List<TaskModel>,
             binding.taskDone.setOnCheckedChangeListener { _, isChecked ->
                 listener.onTaskCheckChanged(task, isChecked)
             }
+
             binding.deleteButton.setOnClickListener { listener.onTaskDelete(task) }
+
+            if (task.deadline.isNotBlank()) {
+                binding.taskDeadline.visibility = View.VISIBLE
+                binding.taskDeadline.text = "Due: ${task.deadline}"
+            } else {
+                binding.taskDeadline.visibility = View.GONE
+            }
         }
     }
 }
