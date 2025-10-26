@@ -68,6 +68,11 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
         app.tasks.update(task)
     }
 
+    override fun onTaskDelete(task: TaskModel) {
+        app.tasks.delete(task)
+        binding.recyclerView.adapter = TaskAdapter(app.tasks.findAll(), this)
+    }
+
     private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()

@@ -33,6 +33,11 @@ class TaskMemStore : TaskStore {
         }
     }
 
+    override fun delete(task: TaskModel) {
+        tasks.remove(task)
+        logAll()
+    }
+
     private fun logAll() {
         tasks.forEach { i("$it") }
     }

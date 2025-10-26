@@ -9,6 +9,7 @@ import org.ca1.studyapp.models.TaskModel
 interface TaskListener {
     fun onTaskClick(task: TaskModel)
     fun onTaskCheckChanged(task: TaskModel, isChecked: Boolean)
+    fun onTaskDelete(task: TaskModel)
 }
 
 class TaskAdapter (private var tasks: List<TaskModel>,
@@ -42,6 +43,7 @@ class TaskAdapter (private var tasks: List<TaskModel>,
             binding.taskDone.setOnCheckedChangeListener { _, isChecked ->
                 listener.onTaskCheckChanged(task, isChecked)
             }
+            binding.deleteButton.setOnClickListener { listener.onTaskDelete(task) }
         }
     }
 }
