@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-//TODO: input validation
+
 //TODO: JSON STORAGE
 //TODO: ADD LIST SORTING BY TYPE/DEADLINE
 class TaskActivity : AppCompatActivity() {
@@ -71,8 +71,8 @@ class TaskActivity : AppCompatActivity() {
         }
 
         binding.btnAdd.setOnClickListener {
-            task.title = binding.taskTitle.text.toString()
-            task.description = binding.taskDescription.text.toString()
+            task.title = binding.taskTitle.text.toString().trim()
+            task.description = binding.taskDescription.text.toString().trim()
             task.type = when {
                 binding.chipStudy.isChecked -> TaskType.STUDY
                 binding.chipLab.isChecked -> TaskType.LAB
@@ -82,8 +82,19 @@ class TaskActivity : AppCompatActivity() {
             }
 
             if (task.title.isEmpty()) {
-                Snackbar.make(it, R.string.enter_task_title, Snackbar.LENGTH_LONG)
+                Snackbar.make(it, R.string.enter_task_title, Snackbar.LENGTH_LONG).show()
+            } else if (task.title.length < 3) {
+                Snackbar.make(it, "Task title must be at least 3 characters", Snackbar.LENGTH_LONG)
                     .show()
+            } else if (task.title.length > 100) {
+                Snackbar.make(it, "Task title must not exceed 100 characters", Snackbar.LENGTH_LONG)
+                    .show()
+            } else if (task.description.length > 300) {
+                Snackbar.make(
+                    it,
+                    "Task description must not exceed 300 characters",
+                    Snackbar.LENGTH_LONG
+                ).show()
             } else {
                 if (edit) {
                     app.tasks.update(task.copy())
@@ -95,7 +106,6 @@ class TaskActivity : AppCompatActivity() {
             }
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_task_activity, menu)
