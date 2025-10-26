@@ -31,13 +31,26 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="A Title" />
 
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/content_desc_mark_done"
+            android:src="@android:drawable/ic_menu_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:tint="?attr/colorError" />
+
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/taskDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/content_desc_mark_done"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/deleteButton"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
 
