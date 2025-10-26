@@ -28,9 +28,12 @@
                 android:id="@+id/toolbarAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
                 app:titleCentered="true"
-                app:titleTextColor="#0D0B0B" />
+                app:titleTextColor="@android:color/black" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView
