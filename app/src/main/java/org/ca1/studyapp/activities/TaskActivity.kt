@@ -36,6 +36,7 @@ class TaskActivity : AppCompatActivity() {
         if (intent.hasExtra("task_edit")) {
             edit = true
             task = intent.extras?.getParcelable("task_edit")!!
+            binding.toolbarAdd.setTitle(R.string.edit_task)
             binding.taskTitle.setText(task.title)
             binding.taskDescription.setText(task.description)
             binding.btnAdd.setText(R.string.save_task)
