@@ -7,5 +7,14 @@ import kotlinx.parcelize.Parcelize
 data class TaskModel(
     var id: Long = 0,
     var title: String = "",
-    var description: String = ""
+    var description: String = "",
+    var type: TaskType = TaskType.GENERAL,
+    var completed: Boolean = false
 ) : Parcelable
+
+enum class TaskType {
+    ASSIGNMENT,
+    LAB,
+    STUDY,
+    GENERAL
+}
