@@ -4,7 +4,8 @@
 
     <item
         android:id="@+id/item_add"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/add_circle_24px"
+        android:iconTint="#000000"
         android:title="@string/menu_addTask"
         app:showAsAction="always" />
 

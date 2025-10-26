@@ -17,7 +17,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@android:color/transparent"
             android:fitsSystemWindows="true"
             app:elevation="0dip">
 
@@ -25,7 +25,9 @@
                 android:id="@+id/toolbarAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:titleTextColor="?attr/colorOnPrimary" />
+                android:background="#00FFFFFF"
+                app:titleCentered="true"
+                app:titleTextColor="#0D0B0B" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <ScrollView
@@ -82,6 +84,32 @@
                             android:padding="8dp"
                             android:textColor="?attr/colorOnSurface"
                             android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="1"
+                                android:text="@string/select_deadline"
+                                android:textSize="16sp" />
+
+                            <Button
+                                android:id="@+id/button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/button_select_date"
+                                app:icon="@drawable/calendar_clock_24px" />
+                        </LinearLayout>
 
                         <com.google.android.material.chip.ChipGroup
                             android:layout_width="match_parent"
