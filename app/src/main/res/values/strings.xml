@@ -9,8 +9,14 @@
     <string name="save_task">Save Task</string>
     <string name="hint_taskType">Save Task</string>
     <string name="content_desc_mark_done">Mark task as done</string>
+    <string name="content_desc_delete_task">Delete task</string>
     <string name="task_type_task">Task</string>
     <string name="task_type_assignment">Assignment</string>
     <string name="task_type_lab">Lab</string>
     <string name="task_type_study">Study</string>
+    <string name="due_date_label">Due Date:</string>
+    <string name="set_deadline">Set Deadline</string>
+    <string name="select_deadline">Select Deadline</string>
+    <string name="button_select_date">Select Date</string>
+    <string name="create_task">New Task</string>
 </resources>
