@@ -39,13 +39,14 @@ class TaskAdapter (private var tasks: List<TaskModel>,
             binding.taskType.text = task.type.name
             binding.taskDone.isChecked = task.completed
 
-            binding.root.setOnClickListener { listener.onTaskClick(task) }
-
+            binding.taskDone.isChecked = task.completed
             binding.taskDone.setOnCheckedChangeListener { _, isChecked ->
                 listener.onTaskCheckChanged(task, isChecked)
             }
 
             binding.deleteButton.setOnClickListener { listener.onTaskDelete(task) }
+
+            binding.root.setOnClickListener { listener.onTaskClick(task) }
 
             if (task.deadline.isNotBlank()) {
                 binding.taskDeadline.visibility = View.VISIBLE

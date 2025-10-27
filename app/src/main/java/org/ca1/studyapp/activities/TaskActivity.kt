@@ -23,6 +23,7 @@ class TaskActivity : AppCompatActivity() {
     var task = TaskModel()
     lateinit var app: MainApp
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var edit = false
