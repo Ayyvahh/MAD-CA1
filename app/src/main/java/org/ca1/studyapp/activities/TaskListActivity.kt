@@ -30,7 +30,21 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = TaskAdapter(app.tasks.findAll(), this)
+
+        refreshList(binding.chip3.isChecked)
+
+        binding.chip3.setOnCheckedChangeListener { _, isChecked ->
+            refreshList(isChecked)
+        }
+    }
+
+    private fun refreshList(includeCompleted: Boolean) {
+        val tasks = if (includeCompleted) {
+            app.tasks.findAll()
+        } else {
+            app.tasks.findAll().filter { !it.completed }
+        }
+        binding.recyclerView.adapter = TaskAdapter(tasks, this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -53,7 +67,7 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                (binding.recyclerView.adapter)?.notifyItemRangeChanged(0, app.tasks.findAll().size)
+                refreshList(binding.chip3.isChecked)
             }
         }
 
@@ -66,11 +80,12 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
     override fun onTaskCheckChanged(task: TaskModel, isChecked: Boolean) {
         task.completed = isChecked
         app.tasks.update(task)
+        refreshList(binding.chip3.isChecked)
     }
 
     override fun onTaskDelete(task: TaskModel) {
         app.tasks.delete(task)
-        binding.recyclerView.adapter = TaskAdapter(app.tasks.findAll(), this)
+        refreshList(binding.chip3.isChecked)
     }
 
     private val getClickResult =
@@ -78,8 +93,7 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0, app.tasks.findAll().size)
+                refreshList(binding.chip3.isChecked)
             }
         }
 }
